@@ -44,7 +44,8 @@
 ","							{return ,;}
 ";"							{return ; ;}
 "."							{return .;}
-
+"++"						{return INC;}
+"--"						{return DEC;}
 
 [0-9]+						(yy1val=atoi(yytext); return DIGITO;)
 (-)?{[0-9]}+(.){[0-9]}*		(yy1val=atoi(yytext); return REAL;)
