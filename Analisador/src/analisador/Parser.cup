@@ -1,0 +1,64 @@
+package analisador;
+
+import java.io.*;
+import java.lang.*;
+import java_cup.runtime.*;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.*;
+import analisador.Yylex;
+
+parser code
+{:
+    private Symbol s;  //s recebe o Symbol da classe Symbol
+    
+    public static void main(String args[]) throws Exception{
+    //    new Parser (new Yylex(System.in)).parse();
+    }
+    
+    public void syntax_error(Symbol s){
+        this.s = s; //recebe simbolo que deu erro        
+    }
+
+    //metodo para pegar o "s"
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal LINHA, OP_ARITMETICO, OPERADOR_LOGICO, OP_RELACIONAL, OP_BOOLEANO, ABRE_PARENTESES, FECHA_PARENTESES, ABRE_COLCHETES, FECHA_COLCHETES, PONTO_VIRGULA, DOIS_PONTOS, VIRGULA, PONTO, ASPAS_DUPLAS, ASPAS_SIMPLES,  COMENTARIO, PRINCIPAL, FIM, FUNCAO, FUNCAO_FIM, SE, SE_FIM, ESE, ESE_FIM, SENAO, SENAO_FIM, REPETICAO, REPETICAO_FIM, ENQUANTO, ENQUANTO_FIM, ESCREVA, LEIA, RETORNA, IDENTIFICADOR, NUMERO, ERROR;
+
+
+non terminal programa, funcoes, operacoes, comandos, atribuicao, condicional, loop;
+
+start with programa;
+
+programa ::= PRINCIPAL operacoes FIM | funcoes PRINCIPAL operacoes FIM;	
+
+funcoes ::= funcoes FUNCAO operacoes FUNCAO_FIM | FUNCAO operacoes FUNCAO_FIM;
+
+operacoes ::= comandos | comandos operacoes | condicional | loop;
+
+comandos ::= ;
+
+condicional ::= condicional_simples | condicional_simples condicional; 
+
+condicional_simples ::= SE CONDICAO operacoes SE_FIM | SE CONDICAO operacoes SE_FIM condicional_composta;
+
+condicional_composta ::= ESE CONDICAO operacoes ESE_FIM | ESE CONDICAO operacoes ESE_FIM condicional_composta| SENAO operacoes SENAO_FIM;
+
+CONDICAO ::= VARIAVEL OP_RELACIONAL VARIAVEL| VARIAVEL OP_RELACIONAL NUMERO | VARIAVEL OP_RELACIONAL DIGITO | VARIAVEL OP_RELACIONAL OP_BOOLEANO | VARIAVEL OP_RELACIONAL STRING;
+
+STRING ::= ASPAS_DUPLAS IDENTIFICADOR ASPAS_DUPLAS | ASPAS_SIMPLES IDENTIFICADOR ASPAS_SIMPLES;
+
+VARIAVEL ::= IDENTIFICADOR ABRE_PARENTESES NUMERO FECHA_PARENTESES | IDENTIFICADOR ABRE_PARENTESES OP_BOOLEANO FECHA_PARENTESES | IDENTIFICADOR ABRE_PARENTESES STRING FECHA_PARENTESES;
+
+loop ::= REPETICAO ABRE_COLCHETES ITERADOR FECHA_COLCHETES operacoes REPETICAO_FIM;
+
+ITERADOR ::= VARIAVEL ABRE_PARENTESES NUMERO FECHA_PARENTESES PONTO_VIRGULA ;
+
+
+//comandos executaveis
+IMPRIME ::= ESCREVA VARIAVEL | ESCREVA STRING | ESCREVA NUMERO;
+ESCANEIA ::= ;
+

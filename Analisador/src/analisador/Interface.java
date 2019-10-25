@@ -64,17 +64,66 @@ public class Interface extends javax.swing.JFrame {
                     resultado = resultado + "Linha: " + cont +  "<Operador_Relacional> " + lexer.lexeme + "\n";
                     break;
                     
+                case OP_COMPARACAO:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Operador_Comparacao> " + lexer.lexeme + "\n";
+                    break;              
+                    
                 case OP_BOOLEANO:
 //                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Booleano> " + lexer.lexeme + "\n" ;
                     break;
                     
-                case SEPARADOR:
+                case ABRE_PARENTESES:
 //                    cont++;
-                    resultado = resultado + "Linha: " + cont +  "<Separador> " + lexer.lexeme + "\n";
+                    resultado = resultado + "Linha: " + cont +  "<Abre_Parenteses> " + lexer.lexeme + "\n";
+                    break;
+
+                case FECHA_PARENTESES:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Fecha_Parenteses> " + lexer.lexeme + "\n";
                     break;
                     
+                case ABRE_COLCHETES:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Abre_Colchetes> " + lexer.lexeme + "\n";
+                    break;
                     
+                case FECHA_COLCHETES:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Fecha_Colchetes> " + lexer.lexeme + "\n";
+                    break;
+                    
+                case PONTO_VIRGULA:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Ponto_Virgula> " + lexer.lexeme + "\n";
+                    break;
+
+                case DOIS_PONTOS:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Dois_Pontos> " + lexer.lexeme + "\n";
+                    break;
+ 
+                case VIRGULA:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Virgula> " + lexer.lexeme + "\n";
+                    break;
+
+                case PONTO:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Ponto> " + lexer.lexeme + "\n";
+                    break;
+                    
+                case ASPAS_DUPLAS:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Aspas_Duplas> " + lexer.lexeme + "\n";
+                    break;
+                    
+                case ASPAS_SIMPLES:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Aspas_Simples> " + lexer.lexeme + "\n";
+                    break;                   
+                                        
                 case COMENTARIO:
 //                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Comentario> " + lexer.lexeme + "\n";
@@ -165,21 +214,26 @@ public class Interface extends javax.swing.JFrame {
 //                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Retorna>" + lexer.lexeme + "\n";
                    break;                   
+                   
+                case IDENTIFICADOR:
+//                   cont ++;
+                   resultado = resultado + "Linha: " + cont + "<Identificador>" + lexer.lexeme + "\n";
+                   break;  
 
+                case INTEIRO:
+//                   cont ++;
+                   resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
+                   break;
+                   
+                case REAL:
+//                   cont ++;
+                   resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
+                   break;                   
+               
                 case ERROR:
 //                   cont ++;
                    resultado = resultado + "Erro na linha " + cont + ": Símbolo não reconhecido \n" ;   
-                   break;
-                   
-                case PALAVRA:
-//                   cont ++;
-                   resultado = resultado + "Linha: " + cont + "<PALAVRA>" + lexer.lexeme + "\n";
-                   break;  
-
-                case NUMERO:
-//                   cont ++;
-                   resultado = resultado + "Linha: " + cont + "<NUMERO>" + lexer.lexeme + "\n";
-                   break;                     
+                   break;           
                    
                 default:
 //                    cont ++;

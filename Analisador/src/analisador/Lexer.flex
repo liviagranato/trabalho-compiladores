@@ -5,8 +5,11 @@ import static analisador.Token.*;
 %class Lexer
 %type Token
 
-L = [a-zA-Z_]
-D = [0-9]
+CARACTERE = [a-zA-Z_]
+DIGITO = [0-9]
+INTEIRO = [- | ]?{DIGITO}+
+REAL = [- | ]?{DIGITO}+("."){DIGITO}+
+IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
 WHITE=[ \t\r]
 
 %{
@@ -25,13 +28,25 @@ public String lexeme;
 ("E" | "OU" | "!")    {lexeme = yytext(); return OPERADOR_LOGICO;}
 
 /*Operadores Relacionais */
-(">" | "<" | "=" | "?" | ">=" | "<=")   {lexeme = yytext(); return OP_RELACIONAL;}
+(">" | "<" | ">=" | "<=")   {lexeme = yytext(); return OP_RELACIONAL;}
+
+/*Operadores de Comparação*/
+("=" | "?")     {lexeme = yytext(); return OP_COMPARACAO;}
 
 /*Operadores Booleanos*/
-("falso" | "vdd")      {lexeme=yytext(); return OP_BOOLEANO;}
+("falso" | "vdd")   {lexeme=yytext(); return OP_BOOLEANO;}
 
 /*Separadores */
-("(" | ")" | "[" | "]" | ";" | "," |  "." |  "\"")      {lexeme = yytext(); return SEPARADOR;}
+("(")   {lexeme = yytext(); return ABRE_PARENTESES;}
+( ")")  {lexeme = yytext(); return FECHA_PARENTESES;}
+("[")   {lexeme = yytext(); return ABRE_COLCHETES;}
+("]")   {lexeme = yytext(); return FECHA_COLCHETES;}
+(";")   {lexeme = yytext(); return PONTO_VIRGULA;}
+(":")   {lexeme = yytext(); return DOIS_PONTOS;}
+(",")   {lexeme = yytext(); return VIRGULA;}
+(".")   {lexeme = yytext(); return PONTO;}
+("\"")  {lexeme = yytext(); return ASPAS_DUPLAS;}
+("\'")  {lexeme = yytext(); return ASPAS_SIMPLES;}
 
 /* Comentarios */
 ("##"(.)* | "#"(.)*"#" )   {lexeme = yytext(); return COMENTARIO;}
@@ -87,7 +102,8 @@ public String lexeme;
 /* Palavra reservada RETORNA*/
 ("RETORNA")   {lexeme = yytext(); return RETORNA;}
 
-{L}({L}|{D})* {lexeme=yytext(); return PALAVRA;}
-({D}+ | {D}+"."{D}+) | "-"({D}+ | {D}+"."{D}+) {lexeme=yytext(); return NUMERO;}
+{IDENTIFICADOR} {lexeme=yytext(); return IDENTIFICADOR;}
+{INTEIRO} {lexeme=yytext(); return INTEIRO;}
+{REAL} {lexeme=yytext(); return REAL;}
 
 . {return ERROR;}
