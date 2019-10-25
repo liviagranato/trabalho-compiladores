@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package analisador;
 
 import java.io.File;
@@ -8,15 +13,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
-import java.awt.Color;
 
-public class Interface extends javax.swing.JFrame { 
-    
+/**
+ *
+ * @author vitau
+ */
+public class Interface extends javax.swing.JFrame {
     public JTextArea jText;
+      
+    /**
+     * Creates new form Novo
+     */
+    public Interface() {
+        initComponents();
+    }
     
-   // metodo executar
     public void executar()throws Exception{ 
-     
        int cont = 0;     
        
        jText = textArea1;    //recebe o que foi digitado
@@ -36,7 +48,7 @@ public class Interface extends javax.swing.JFrame {
            
            if(token == null){
                
-                textArea.setText(resultado);
+                textArea2.setText(resultado);
                 //textArea.setForeground(Color.BLACK);
           
                 return;
@@ -244,13 +256,6 @@ public class Interface extends javax.swing.JFrame {
             
     }
 
-    public Interface() {
-        initComponents();
-        this.setLocationRelativeTo(this);
-        Look.definelook(this);
-        //setExtendedState(MAXIMIZED_BOTH);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -260,201 +265,310 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lb_analiseLexica = new javax.swing.JLabel();
-        lb_entrada = new javax.swing.JLabel();
-        btnAnalisar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textArea = new javax.swing.JTextArea();
+        MainFrame = new javax.swing.JPanel();
+        Header = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        importBtn = new javax.swing.JLabel();
+        jLabel915 = new javax.swing.JLabel();
+        Sidebar = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        compileBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        separator2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textArea1 = new javax.swing.JTextArea();
-        btn_analiseSintatica = new javax.swing.JLabel();
+        textArea2 = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        ComboBox = new javax.swing.JComboBox();
+        Sidebar1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        folderIcon = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        textAreaSintatico = new javax.swing.JTextArea();
-        btnAnalisarSintatico = new javax.swing.JButton();
-        btnLimpar1 = new javax.swing.JButton();
-        btnBuscarArquivo = new javax.swing.JButton();
+        textArea1 = new javax.swing.JTextArea();
+        separator = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("IDE | Análisador VAL");
+        setPreferredSize(new java.awt.Dimension(1600, 1000));
+        setSize(new java.awt.Dimension(1600, 1000));
 
-        lb_analiseLexica.setBackground(new java.awt.Color(102, 102, 0));
-        lb_analiseLexica.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        lb_analiseLexica.setForeground(new java.awt.Color(153, 51, 0));
-        lb_analiseLexica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_analiseLexica.setText("Análise Léxica");
-        lb_analiseLexica.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 171, 134)));
+        MainFrame.setBackground(new java.awt.Color(39, 39, 47));
+        MainFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lb_entrada.setBackground(new java.awt.Color(51, 153, 0));
-        lb_entrada.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        lb_entrada.setForeground(new java.awt.Color(153, 0, 51));
-        lb_entrada.setText("Entrada");
-        lb_entrada.setBorder(new javax.swing.border.MatteBorder(null));
+        Header.setBackground(new java.awt.Color(48, 50, 62));
+        Header.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
-        btnAnalisar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnAnalisar.setForeground(new java.awt.Color(153, 0, 51));
-        btnAnalisar.setText("Analisar");
-        btnAnalisar.setBorder(new javax.swing.border.MatteBorder(null));
-        btnAnalisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnalisarActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Codekit");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/terminal.png"))); // NOI18N
+
+        importBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/import.png"))); // NOI18N
+        importBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                importBtnMouseClicked(evt);
             }
         });
 
-        btnLimpar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(153, 0, 51));
-        btnLimpar.setText("Limpar");
-        btnLimpar.setBorder(new javax.swing.border.MatteBorder(null));
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel915.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/info.png"))); // NOI18N
+
+        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
+        Header.setLayout(HeaderLayout);
+        HeaderLayout.setHorizontalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel3)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1245, Short.MAX_VALUE)
+                .addComponent(importBtn)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel915)
+                .addGap(65, 65, 65))
+        );
+        HeaderLayout.setVerticalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(HeaderLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(HeaderLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel915))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(importBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        MainFrame.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1600, 80));
+
+        Sidebar.setBackground(new java.awt.Color(48, 50, 62));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("COMPILADOR");
+
+        compileBtn.setBackground(new java.awt.Color(80, 147, 240));
+        compileBtn.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        compileBtn.setForeground(new java.awt.Color(255, 255, 255));
+        compileBtn.setText("COMPILAR");
+        compileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
+                compileBtnActionPerformed(evt);
             }
         });
 
-        textArea.setColumns(20);
-        textArea.setRows(5);
-        jScrollPane3.setViewportView(textArea);
+        jPanel1.setBackground(new java.awt.Color(251, 206, 79));
+        jPanel1.setPreferredSize(new java.awt.Dimension(189, 2));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 189, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("SAÍDA");
+
+        separator2.setBackground(new java.awt.Color(251, 206, 79));
+        separator2.setPreferredSize(new java.awt.Dimension(189, 2));
+        separator2.setVerifyInputWhenFocusTarget(false);
+
+        javax.swing.GroupLayout separator2Layout = new javax.swing.GroupLayout(separator2);
+        separator2.setLayout(separator2Layout);
+        separator2Layout.setHorizontalGroup(
+            separator2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        separator2Layout.setVerticalGroup(
+            separator2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        textArea2.setBackground(new java.awt.Color(60, 65, 84));
+        textArea2.setColumns(20);
+        textArea2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        textArea2.setForeground(new java.awt.Color(255, 255, 255));
+        textArea2.setRows(5);
+        textArea2.setBorder(null);
+        textArea2.setSelectionColor(new java.awt.Color(255, 153, 51));
+        jScrollPane1.setViewportView(textArea2);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Tipo de Análise");
+
+        ComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Léxica", "Sintática" }));
+
+        javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
+        Sidebar.setLayout(SidebarLayout);
+        SidebarLayout.setHorizontalGroup(
+            SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SidebarLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(SidebarLayout.createSequentialGroup()
+                .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SidebarLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel2))
+                    .addGroup(SidebarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(compileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SidebarLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4)
+                            .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(ComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SidebarLayout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(220, Short.MAX_VALUE)))
+        );
+        SidebarLayout.setVerticalGroup(
+            SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SidebarLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(compileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+            .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SidebarLayout.createSequentialGroup()
+                    .addGap(318, 318, 318)
+                    .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(709, Short.MAX_VALUE)))
+        );
+
+        MainFrame.add(Sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1191, -30, 410, 1030));
+
+        Sidebar1.setBackground(new java.awt.Color(35, 35, 43));
+        Sidebar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+
+        jPanel2.setBackground(new java.awt.Color(251, 206, 79));
+        jPanel2.setPreferredSize(new java.awt.Dimension(3, 38));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Programa Principal");
+
+        folderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/folder.png"))); // NOI18N
+
+        javax.swing.GroupLayout Sidebar1Layout = new javax.swing.GroupLayout(Sidebar1);
+        Sidebar1.setLayout(Sidebar1Layout);
+        Sidebar1Layout.setHorizontalGroup(
+            Sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Sidebar1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(folderIcon)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        Sidebar1Layout.setVerticalGroup(
+            Sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Sidebar1Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addGroup(Sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(folderIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addContainerGap(858, Short.MAX_VALUE))
+        );
+
+        MainFrame.add(Sidebar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("ENTRADA");
+        MainFrame.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
+
+        textArea1.setBackground(new java.awt.Color(60, 65, 84));
         textArea1.setColumns(20);
+        textArea1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        textArea1.setForeground(new java.awt.Color(255, 255, 255));
         textArea1.setRows(5);
-        jScrollPane1.setViewportView(textArea1);
+        textArea1.setSelectionColor(new java.awt.Color(255, 153, 51));
+        jScrollPane2.setViewportView(textArea1);
 
-        btn_analiseSintatica.setBackground(new java.awt.Color(102, 102, 0));
-        btn_analiseSintatica.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        btn_analiseSintatica.setForeground(new java.awt.Color(153, 51, 0));
-        btn_analiseSintatica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_analiseSintatica.setText("Análise Sintática");
-        btn_analiseSintatica.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 171, 134)));
+        MainFrame.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 830, 790));
 
-        textAreaSintatico.setColumns(20);
-        textAreaSintatico.setRows(5);
-        jScrollPane2.setViewportView(textAreaSintatico);
+        separator.setBackground(new java.awt.Color(251, 206, 79));
+        separator.setPreferredSize(new java.awt.Dimension(189, 2));
+        separator.setVerifyInputWhenFocusTarget(false);
 
-        btnAnalisarSintatico.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnAnalisarSintatico.setForeground(new java.awt.Color(153, 0, 51));
-        btnAnalisarSintatico.setText("Analisar");
-        btnAnalisarSintatico.setBorder(new javax.swing.border.MatteBorder(null));
-        btnAnalisarSintatico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnalisarSintaticoActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout separatorLayout = new javax.swing.GroupLayout(separator);
+        separator.setLayout(separatorLayout);
+        separatorLayout.setHorizontalGroup(
+            separatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 189, Short.MAX_VALUE)
+        );
+        separatorLayout.setVerticalGroup(
+            separatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
-        btnLimpar1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnLimpar1.setForeground(new java.awt.Color(153, 0, 51));
-        btnLimpar1.setText("Limpar");
-        btnLimpar1.setBorder(new javax.swing.border.MatteBorder(null));
-        btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpar1ActionPerformed(evt);
-            }
-        });
-
-        btnBuscarArquivo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        btnBuscarArquivo.setForeground(new java.awt.Color(153, 0, 51));
-        btnBuscarArquivo.setText("Arquivo");
-        btnBuscarArquivo.setBorder(new javax.swing.border.MatteBorder(null));
-        btnBuscarArquivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarArquivoActionPerformed(evt);
-            }
-        });
+        MainFrame.add(separator, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 135, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnAnalisarSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(290, 290, 290))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btn_analiseSintatica, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(105, 105, 105))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnBuscarArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lb_analiseLexica, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(107, 107, 107))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lb_entrada)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAnalisar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
+            .addComponent(MainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_analiseLexica)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_entrada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAnalisar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscarArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
-                .addGap(30, 30, 30)
-                .addComponent(btn_analiseSintatica)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnalisarSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAnalisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisarActionPerformed
-        //chamada do metod executar
-        try{
-            executar();
-        }catch(Exception e)
-                {e.printStackTrace();
-                }
-    }//GEN-LAST:event_btnAnalisarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // ira apenas apagar o que foi inserido nos resultados
-        textArea1.setText("");
-        textArea.setText("");
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnAnalisarSintaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisarSintaticoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnalisarSintaticoActionPerformed
-
-    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
-        // ira apenas apagar o que foi inserido nos resultados
-        textAreaSintatico.setText("");
-        textAreaSintatico.setText("");
-    }//GEN-LAST:event_btnLimpar1ActionPerformed
-
-    private void btnBuscarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarArquivoActionPerformed
-       try {
+    private void importBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBtnMouseClicked
+        try {
             // TODO add your handling code here:
         JFileChooser abrir = new JFileChooser();
         abrir.showOpenDialog(this);
@@ -468,7 +582,24 @@ public class Interface extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnBuscarArquivoActionPerformed
+    }//GEN-LAST:event_importBtnMouseClicked
+
+    private void compileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compileBtnActionPerformed
+        try{
+            String value = ComboBox.getSelectedItem().toString();
+
+            if(value.equals("Léxica")){
+                executar();
+            }
+
+            else{
+                textArea2.setText("teste");
+            }
+
+        }catch(Exception e)
+        {e.printStackTrace();
+        }
+    }//GEN-LAST:event_compileBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -507,19 +638,29 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnalisar;
-    private javax.swing.JButton btnAnalisarSintatico;
-    private javax.swing.JButton btnBuscarArquivo;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnLimpar1;
-    private javax.swing.JLabel btn_analiseSintatica;
+    private javax.swing.JComboBox ComboBox;
+    private javax.swing.JPanel Header;
+    private javax.swing.JPanel MainFrame;
+    private javax.swing.JPanel Sidebar;
+    private javax.swing.JPanel Sidebar1;
+    private javax.swing.JButton compileBtn;
+    private javax.swing.JLabel folderIcon;
+    private javax.swing.JLabel importBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel915;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lb_analiseLexica;
-    private javax.swing.JLabel lb_entrada;
-    private javax.swing.JTextArea textArea;
+    private javax.swing.JPanel separator;
+    private javax.swing.JPanel separator2;
     private javax.swing.JTextArea textArea1;
-    private javax.swing.JTextArea textAreaSintatico;
+    private javax.swing.JTextArea textArea2;
     // End of variables declaration//GEN-END:variables
 }
