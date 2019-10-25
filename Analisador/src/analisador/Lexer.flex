@@ -22,16 +22,24 @@ public String lexeme;
 ( "\n" )    {lexeme = yytext(); return LINHA;}
 
 /*Operadores Aritméticos */
-("+" | "-" | "X" | "/" | "¨" | "%" ) {lexeme = yytext(); return OP_ARITMETICO;}
+( "X" | "/" | "¨" | "%" ) {lexeme = yytext(); return OP_ARITMETICO;}
+
+/*Operador Soma*/
+("+") {lexeme = yytext(); return OP_SOMA;}
+
+/*Operador Subtração*/
+("-") {lexeme = yytext(); return OP_SUBTRACAO;}
 
 /* Operadores Lógicos */
-("E" | "OU" | "!")    {lexeme = yytext(); return OPERADOR_LOGICO;}
+("E" | "OU")    {lexeme = yytext(); return OP_LOGICO;}
+("!")   {lexeme = yytext(); return OP_NEGACAO;}
 
 /*Operadores Relacionais */
 (">" | "<" | ">=" | "<=")   {lexeme = yytext(); return OP_RELACIONAL;}
 
 /*Operadores de Comparação*/
-("=" | "?")     {lexeme = yytext(); return OP_COMPARACAO;}
+("=")   {lexeme = yytext(); return OP_IGUAL;}
+("?")   {lexeme = yytext(); return OP_DIFERENTE;}
 
 /*Operadores Booleanos*/
 ("falso" | "vdd")   {lexeme=yytext(); return OP_BOOLEANO;}

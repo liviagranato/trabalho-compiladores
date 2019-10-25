@@ -18,7 +18,8 @@ import analisador.sym;
 
 CARACTERE = [a-zA-Z_]
 DIGITO = [0-9]
-NUMERO = [- | ]?({DIGITO}+ | {DIGITO}+("."){DIGITO}+)
+INTEIRO = [- | ]?{DIGITO}+
+REAL = [- | ]?{DIGITO}+("."){DIGITO}+
 IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
 WHITE=[ \t\r\n]
 
@@ -35,7 +36,10 @@ public String lexeme;
 ("E" | "OU" | "!")  {return new Symbol(sym.OPERADOR_LOGICO, yychar, yyline, yytext());}
 
 /*Operadores Relacionais */
-(">" | "<" | "=" | "?" | ">=" | "<=")   {return new Symbol(sym.OP_RELACIONAL, yychar, yyline, yytext());}
+(">" | "<" | ">=" | "<=")   {return new Symbol(sym.OP_RELACIONAL, yychar, yyline, yytext());}
+
+/*Operadores de Comparação*/
+("=" | "?")     {return new Symbol(sym.OP_COMPARACAO, yychar, yyline, yytext());}
 
 /*Operadores Booleanos*/
 ("falso" | "vdd")   {return new Symbol(sym.OP_BOOLEANO, yychar, yyline, yytext());}
@@ -107,6 +111,7 @@ public String lexeme;
 ("RETORNA")   {return new Symbol(sym.RETORNA, yychar, yyline, yytext());}
 
 {IDENTIFICADOR} {return new Symbol(sym.IDENTIFICADOR, yychar, yyline, yytext());}
-{NUMERO} {return new Symbol(sym. NUMERO, yychar, yyline, yytext());}
+{INTEIRO} {return new Symbol(sym.INTEIRO, yychar, yyline, yytext());}}
+{REAL} {return new Symbol(sym.REAL, yychar, yyline, yytext());}}
 
 . {System.err.println("Caracter ilegal: " + yytext());}
