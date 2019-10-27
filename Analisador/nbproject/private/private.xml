@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vitau/OneDrive/Documents/Pessoal/Trabalho/Git/TrabalhoFinal_Compiladores/Analisador/src/analisador/Interface.java</file>
+            <file>file:/home/arantesandre97/Developer/trabalho-compiladores/Analisador/src/analisador/Token.java</file>
+            <file>file:/home/arantesandre97/Developer/trabalho-compiladores/Analisador/src/analisador/Main.java</file>
+            <file>file:/home/arantesandre97/Developer/trabalho-compiladores/Analisador/src/analisador/Parser.cup</file>
+            <file>file:/home/arantesandre97/Developer/trabalho-compiladores/Analisador/src/analisador/Interface.java</file>
         </group>
     </open-files>
 </project-private>

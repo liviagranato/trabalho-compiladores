@@ -21,7 +21,7 @@ DIGITO = [0-9]
 INTEIRO = [- | ]?{DIGITO}+
 REAL = [- | ]?{DIGITO}+("."){DIGITO}+
 IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
-WHITE=[ \t\r\n]
+WHITE=[ \t\r]
 
 %{
 public String lexeme;
@@ -29,17 +29,28 @@ public String lexeme;
 %%
 {WHITE} {/*Ignore*/}
 
+/* Pular linha*/
+( "\n" )    {return new Symbol(sym.LINHA, yychar, yyline, yytext());}}
+
 /*Operadores Aritméticos */
-("+" | "-" | "X" | "/" | "¨" | "%" )    {return new Symbol(sym.OP_ARITMETICO, yychar, yyline, yytext());}
+("X" | "/" | "¨" | "%" )    {return new Symbol(sym.OP_ARITMETICO, yychar, yyline, yytext());}
+
+/*Operador Soma*/
+("+") {return new Symbol(sym.OP_SOMA, yychar, yyline, yytext());}
+
+/*Operador Subtração*/
+("-") {return new Symbol(sym.OP_SUBTRACAO, yychar, yyline, yytext());}
 
 /* Operadores Lógicos */
-("E" | "OU" | "!")  {return new Symbol(sym.OPERADOR_LOGICO, yychar, yyline, yytext());}
+("E" | "OU")  {return new Symbol(sym.OPERADOR_LOGICO, yychar, yyline, yytext());}
+("!")   {return new Symbol(sym.OP_NEGACAO, yychar, yyline, yytext());}
 
 /*Operadores Relacionais */
 (">" | "<" | ">=" | "<=")   {return new Symbol(sym.OP_RELACIONAL, yychar, yyline, yytext());}
 
 /*Operadores de Comparação*/
-("=" | "?")     {return new Symbol(sym.OP_COMPARACAO, yychar, yyline, yytext());}
+("=")   {return new Symbol(sym.OP_IGUAL, yychar, yyline, yytext());}
+("?")   {return new Symbol(sym.OP_DIFERENTE, yychar, yyline, yytext());}
 
 /*Operadores Booleanos*/
 ("falso" | "vdd")   {return new Symbol(sym.OP_BOOLEANO, yychar, yyline, yytext());}
@@ -50,9 +61,7 @@ public String lexeme;
 ("[")   {return new Symbol(sym.ABRE_COLCHETES, yychar, yyline, yytext());}
 ("]")   {return new Symbol(sym.FECHA_COLCHETES, yychar, yyline, yytext());}
 (";")   {return new Symbol(sym.PONTO_VIRGULA, yychar, yyline, yytext());}
-(":")   {return new Symbol(sym.DOIS_PONTOS, yychar, yyline, yytext());}
 (",")   {return new Symbol(sym.VIRGULA, yychar, yyline, yytext());}
-(".")   {return new Symbol(sym.PONTO, yychar, yyline, yytext());}
 ("\"")  {return new Symbol(sym.ASPAS_DUPLAS, yychar, yyline, yytext());}
 ("\'")  {return new Symbol(sym.ASPAS_SIMPLES, yychar, yyline, yytext());}
 
@@ -111,7 +120,7 @@ public String lexeme;
 ("RETORNA")   {return new Symbol(sym.RETORNA, yychar, yyline, yytext());}
 
 {IDENTIFICADOR} {return new Symbol(sym.IDENTIFICADOR, yychar, yyline, yytext());}
-{INTEIRO} {return new Symbol(sym.INTEIRO, yychar, yyline, yytext());}}
-{REAL} {return new Symbol(sym.REAL, yychar, yyline, yytext());}}
+{INTEIRO} {return new Symbol(sym.INTEIRO, yychar, yyline, yytext());}
+{REAL} {return new Symbol(sym.REAL, yychar, yyline, yytext());}
 
 . {System.err.println("Caracter ilegal: " + yytext());}

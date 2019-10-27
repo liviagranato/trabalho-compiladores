@@ -50,9 +50,7 @@ public String lexeme;
 ("[")   {lexeme = yytext(); return ABRE_COLCHETES;}
 ("]")   {lexeme = yytext(); return FECHA_COLCHETES;}
 (";")   {lexeme = yytext(); return PONTO_VIRGULA;}
-(":")   {lexeme = yytext(); return DOIS_PONTOS;}
 (",")   {lexeme = yytext(); return VIRGULA;}
-(".")   {lexeme = yytext(); return PONTO;}
 ("\"")  {lexeme = yytext(); return ASPAS_DUPLAS;}
 ("\'")  {lexeme = yytext(); return ASPAS_SIMPLES;}
 

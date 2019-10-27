@@ -2,7 +2,7 @@ package analisador;
 
 import java.io.File;
 
-public class Main {
+public class MainLex {
 
 //metodo para criar a nova classe para fazer a análise léxica do codigo
 public static void geraLexer(String path){

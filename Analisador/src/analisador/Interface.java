@@ -66,9 +66,24 @@ public class Interface extends javax.swing.JFrame {
                     resultado = resultado + "Linha: " + cont + "<Operador_Aritmético> "  + lexer.lexeme + "\n"; 
                     break;
                     
-                case OPERADOR_LOGICO:
+                case OP_SOMA:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont + "<Operador_Soma> "  + lexer.lexeme + "\n"; 
+                    break;
+                    
+                case OP_SUBTRACAO:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont + "<Operador_Subtração> "  + lexer.lexeme + "\n"; 
+                    break;                    
+                    
+                case OP_LOGICO:
 //                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Lógico> "  + lexer.lexeme + "\n";
+                    break;
+                    
+                case OP_NEGACAO:
+//                    cont ++;
+                    resultado = resultado + "Linha: " + cont + "<Operador_Negação> "  + lexer.lexeme + "\n";
                     break;
                                   
                 case OP_RELACIONAL:
@@ -76,11 +91,16 @@ public class Interface extends javax.swing.JFrame {
                     resultado = resultado + "Linha: " + cont +  "<Operador_Relacional> " + lexer.lexeme + "\n";
                     break;
                     
-                case OP_COMPARACAO:
+                case OP_IGUAL:
 //                    cont++;
-                    resultado = resultado + "Linha: " + cont +  "<Operador_Comparacao> " + lexer.lexeme + "\n";
+                    resultado = resultado + "Linha: " + cont +  "<Operador_Igual> " + lexer.lexeme + "\n";
                     break;              
                     
+                case OP_DIFERENTE:
+//                    cont++;
+                    resultado = resultado + "Linha: " + cont +  "<Operador_Diferente> " + lexer.lexeme + "\n";
+                    break;
+
                 case OP_BOOLEANO:
 //                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Booleano> " + lexer.lexeme + "\n" ;
@@ -111,20 +131,12 @@ public class Interface extends javax.swing.JFrame {
                     resultado = resultado + "Linha: " + cont +  "<Ponto_Virgula> " + lexer.lexeme + "\n";
                     break;
 
-                case DOIS_PONTOS:
-//                    cont++;
-                    resultado = resultado + "Linha: " + cont +  "<Dois_Pontos> " + lexer.lexeme + "\n";
-                    break;
  
                 case VIRGULA:
 //                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Virgula> " + lexer.lexeme + "\n";
                     break;
 
-                case PONTO:
-//                    cont++;
-                    resultado = resultado + "Linha: " + cont +  "<Ponto> " + lexer.lexeme + "\n";
-                    break;
                     
                 case ASPAS_DUPLAS:
 //                    cont++;
