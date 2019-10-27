@@ -2,7 +2,7 @@ package analisador;
 
 import static analisador.Token.*;
 import java_cup.runtime.Symbol;
-import analisador.sym;
+import analisador.Sym;
 
 %%
 
@@ -13,7 +13,7 @@ import analisador.sym;
 %line
 %char
 %eofval{
-    return new Symbol (sym.EOF, new String("Fim do arquivo"));
+    return new Symbol (Sym.EOF, new String("Fim do arquivo"));
 %eofval}
 
 CARACTERE = [a-zA-Z_]
@@ -21,7 +21,7 @@ DIGITO = [0-9]
 INTEIRO = [- | ]?{DIGITO}+
 REAL = [- | ]?{DIGITO}+("."){DIGITO}+
 IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
-WHITE=[ \t\r]
+WHITE=[ \t\r\n]
 
 %{
 public String lexeme;
@@ -29,98 +29,95 @@ public String lexeme;
 %%
 {WHITE} {/*Ignore*/}
 
-/* Pular linha*/
-( "\n" )    {return new Symbol(sym.LINHA, yychar, yyline, yytext());}}
-
 /*Operadores Aritméticos */
-("X" | "/" | "¨" | "%" )    {return new Symbol(sym.OP_ARITMETICO, yychar, yyline, yytext());}
+("X" | "/" | "¨" | "%" )    {return new Symbol(Sym.OP_ARITMETICO, yychar, yyline, yytext());}
 
 /*Operador Soma*/
-("+") {return new Symbol(sym.OP_SOMA, yychar, yyline, yytext());}
+("+") {return new Symbol(Sym.OP_SOMA, yychar, yyline, yytext());}
 
 /*Operador Subtração*/
-("-") {return new Symbol(sym.OP_SUBTRACAO, yychar, yyline, yytext());}
+("-") {return new Symbol(Sym.OP_SUBTRACAO, yychar, yyline, yytext());}
 
 /* Operadores Lógicos */
-("E" | "OU")  {return new Symbol(sym.OPERADOR_LOGICO, yychar, yyline, yytext());}
-("!")   {return new Symbol(sym.OP_NEGACAO, yychar, yyline, yytext());}
+("E" | "OU")  {return new Symbol(Sym.OP_LOGICO, yychar, yyline, yytext());}
+("!")   {return new Symbol(Sym.OP_NEGACAO, yychar, yyline, yytext());}
 
 /*Operadores Relacionais */
-(">" | "<" | ">=" | "<=")   {return new Symbol(sym.OP_RELACIONAL, yychar, yyline, yytext());}
+(">" | "<" | ">=" | "<=")   {return new Symbol(Sym.OP_RELACIONAL, yychar, yyline, yytext());}
 
 /*Operadores de Comparação*/
-("=")   {return new Symbol(sym.OP_IGUAL, yychar, yyline, yytext());}
-("?")   {return new Symbol(sym.OP_DIFERENTE, yychar, yyline, yytext());}
+("=")   {return new Symbol(Sym.OP_IGUAL, yychar, yyline, yytext());}
+("?")   {return new Symbol(Sym.OP_DIFERENTE, yychar, yyline, yytext());}
 
 /*Operadores Booleanos*/
-("falso" | "vdd")   {return new Symbol(sym.OP_BOOLEANO, yychar, yyline, yytext());}
+("falso" | "vdd")   {return new Symbol(Sym.OP_BOOLEANO, yychar, yyline, yytext());}
 
 /*Separadores */
-("(")   {return new Symbol(sym.ABRE_PARENTESES, yychar, yyline, yytext());}
-( ")")  {return new Symbol(sym.FECHA_PARENTESES, yychar, yyline, yytext());}
-("[")   {return new Symbol(sym.ABRE_COLCHETES, yychar, yyline, yytext());}
-("]")   {return new Symbol(sym.FECHA_COLCHETES, yychar, yyline, yytext());}
-(";")   {return new Symbol(sym.PONTO_VIRGULA, yychar, yyline, yytext());}
-(",")   {return new Symbol(sym.VIRGULA, yychar, yyline, yytext());}
-("\"")  {return new Symbol(sym.ASPAS_DUPLAS, yychar, yyline, yytext());}
-("\'")  {return new Symbol(sym.ASPAS_SIMPLES, yychar, yyline, yytext());}
+("(")   {return new Symbol(Sym.ABRE_PARENTESES, yychar, yyline, yytext());}
+( ")")  {return new Symbol(Sym.FECHA_PARENTESES, yychar, yyline, yytext());}
+("[")   {return new Symbol(Sym.ABRE_COLCHETES, yychar, yyline, yytext());}
+("]")   {return new Symbol(Sym.FECHA_COLCHETES, yychar, yyline, yytext());}
+(";")   {return new Symbol(Sym.PONTO_VIRGULA, yychar, yyline, yytext());}
+(",")   {return new Symbol(Sym.VIRGULA, yychar, yyline, yytext());}
+("\"")  {return new Symbol(Sym.ASPAS_DUPLAS, yychar, yyline, yytext());}
+("\'")  {return new Symbol(Sym.ASPAS_SIMPLES, yychar, yyline, yytext());}
 
 /* Comentarios */
 ("##"(.)* | "#"(.)*"#" )   {;}
 
 /* Marcador de inicio do algoritmo */
-("<MAIN>")  {return new Symbol(sym.PRINCIPAL, yychar, yyline, yytext());}
+("<MAIN>")  {return new Symbol(Sym.PRINCIPAL, yychar, yyline, yytext());}
 
 /* Marcador de fim do algoritmo */
-("</MAIN>")  {return new Symbol(sym.FIM, yychar, yyline, yytext());}
+("</MAIN>")  {return new Symbol(Sym.FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio de blocos */
-("<FUNCTION>")  {return new Symbol(sym.FUNCAO, yychar, yyline, yytext());}
+("<FUNCTION>")  {return new Symbol(Sym.FUNCAO, yychar, yyline, yytext());}
 
 /* Marcador de inicio de blocos */
-("</FUNCTION>")  {return new Symbol(sym.FUNCAO_FIM, yychar, yyline, yytext());}
+("</FUNCTION>")  {return new Symbol(Sym.FUNCAO_FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("<SE>")  {return new Symbol(sym.SE, yychar, yyline, yytext());}
+("<SE>")  {return new Symbol(Sym.SE, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("</SE>")  {return new Symbol(sym.SE_FIM, yychar, yyline, yytext());}
+("</SE>")  {return new Symbol(Sym.SE_FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("<ESE>")  {return new Symbol(sym.ESE, yychar, yyline, yytext());}
+("<ESE>")  {return new Symbol(Sym.ESE, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("</ESE>")  {return new Symbol(sym.ESE_FIM, yychar, yyline, yytext());}
+("</ESE>")  {return new Symbol(Sym.ESE_FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("<SENAO>")  {return new Symbol(sym.SENAO, yychar, yyline, yytext());}
+("<SENAO>")  {return new Symbol(Sym.SENAO, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("</SENAO>")  {return new Symbol(sym.SENAO_FIM, yychar, yyline, yytext());}
+("</SENAO>")  {return new Symbol(Sym.SENAO_FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("<RT>")  {return new Symbol(sym.REPETICAO, yychar, yyline, yytext());}
+("<RT>")  {return new Symbol(Sym.REPETICAO, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("</RT>")  {return new Symbol(sym.REPETICAO_FIM, yychar, yyline, yytext());}
+("</RT>")  {return new Symbol(Sym.REPETICAO_FIM, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("<ENQ>")  {return new Symbol(sym.ENQUANTO, yychar, yyline, yytext());}
+("<ENQ>")  {return new Symbol(Sym.ENQUANTO, yychar, yyline, yytext());}
 
 /* Marcador de inicio do algoritmo */
-("</ENQ>")  {return new Symbol(sym.ENQUANTO_FIM, yychar, yyline, yytext());}
+("</ENQ>")  {return new Symbol(Sym.ENQUANTO_FIM, yychar, yyline, yytext());}
 
 /* Identificar a escrita na tela */
-( "<<")  {return new Symbol(sym.ESCREVA, yychar, yyline, yytext());}
+( "<<")  {return new Symbol(Sym.ESCREVA, yychar, yyline, yytext());}
 
 /* Identificar a leitura na tela */
-( ">>")  {return new Symbol(sym.LEIA, yychar, yyline, yytext());}
+( ">>")  {return new Symbol(Sym.LEIA, yychar, yyline, yytext());}
 
 /* Palavra reservada RETORNA*/
-("RETORNA")   {return new Symbol(sym.RETORNA, yychar, yyline, yytext());}
+("RETORNA")   {return new Symbol(Sym.RETORNA, yychar, yyline, yytext());}
 
-{IDENTIFICADOR} {return new Symbol(sym.IDENTIFICADOR, yychar, yyline, yytext());}
-{INTEIRO} {return new Symbol(sym.INTEIRO, yychar, yyline, yytext());}
-{REAL} {return new Symbol(sym.REAL, yychar, yyline, yytext());}
+{IDENTIFICADOR} {return new Symbol(Sym.IDENTIFICADOR, yychar, yyline, yytext());}
+{INTEIRO} {return new Symbol(Sym.INTEIRO, yychar, yyline, yytext());}
+{REAL} {return new Symbol(Sym.REAL, yychar, yyline, yytext());}
 
 . {System.err.println("Caracter ilegal: " + yytext());}
