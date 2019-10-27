@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
@@ -33,7 +34,6 @@ public class Interface extends javax.swing.JFrame {
        
        jText = textArea1;    //recebe o que foi digitado
        String expr;
-       //jText = textArea1;
        expr = (String)jText.getText();   //passa o que foi digitado para uma string e armazena na variável "expr"
        Lexer lexer = new Lexer(new StringReader(expr));   //cria um objeto "lexer", que é da classe "Lexer.java" em passamos 
                                                          //a expressão que foi digitada pelo usuário
@@ -49,8 +49,7 @@ public class Interface extends javax.swing.JFrame {
            if(token == null){
                
                 textArea2.setText(resultado);
-                //textArea.setForeground(Color.BLACK);
-          
+               
                 return;
            }
                //cases para mostrarmos a saida dos tokens 
@@ -58,214 +57,182 @@ public class Interface extends javax.swing.JFrame {
                 
                 case LINHA:                    
                     cont ++;
-                    resultado = resultado + "Linha: " + cont +  "<Linha> " + lexer.lexeme + "\n";     
-                break;
+                    break;
                     
                 case OP_ARITMETICO:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Aritmético> "  + lexer.lexeme + "\n"; 
                     break;
                     
                 case OP_SOMA:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Soma> "  + lexer.lexeme + "\n"; 
                     break;
                     
                 case OP_SUBTRACAO:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Subtração> "  + lexer.lexeme + "\n"; 
                     break;                    
                     
                 case OP_LOGICO:
-//                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Lógico> "  + lexer.lexeme + "\n";
                     break;
                     
                 case OP_NEGACAO:
-//                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<Operador_Negação> "  + lexer.lexeme + "\n";
                     break;
                                   
                 case OP_RELACIONAL:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Relacional> " + lexer.lexeme + "\n";
                     break;
                     
                 case OP_IGUAL:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Igual> " + lexer.lexeme + "\n";
                     break;              
                     
                 case OP_DIFERENTE:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Diferente> " + lexer.lexeme + "\n";
                     break;
 
                 case OP_BOOLEANO:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Operador_Booleano> " + lexer.lexeme + "\n" ;
                     break;
                     
                 case ABRE_PARENTESES:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Abre_Parenteses> " + lexer.lexeme + "\n";
                     break;
 
                 case FECHA_PARENTESES:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Fecha_Parenteses> " + lexer.lexeme + "\n";
                     break;
                     
                 case ABRE_COLCHETES:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Abre_Colchetes> " + lexer.lexeme + "\n";
                     break;
                     
                 case FECHA_COLCHETES:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Fecha_Colchetes> " + lexer.lexeme + "\n";
                     break;
                     
                 case PONTO_VIRGULA:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Ponto_Virgula> " + lexer.lexeme + "\n";
                     break;
-
  
                 case VIRGULA:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Virgula> " + lexer.lexeme + "\n";
                     break;
-
                     
                 case ASPAS_DUPLAS:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Aspas_Duplas> " + lexer.lexeme + "\n";
                     break;
                     
                 case ASPAS_SIMPLES:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Aspas_Simples> " + lexer.lexeme + "\n";
                     break;                   
                                         
                 case COMENTARIO:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont +  "<Comentario> " + lexer.lexeme + "\n";
                     break;
-                  
                                                      
                 case PRINCIPAL:                    
-//                    cont ++;                    
                     resultado = resultado + "Linha: " + cont + "<Inicio_algoritmo>" + lexer.lexeme + "\n";
                     break;
                  
                 case FIM:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Fim_algoritmo>" + lexer.lexeme + "\n";
                     break;
                     
                 case FUNCAO:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Inicio_bloco>" + lexer.lexeme + "\n";
                     break;        
                     
                 case FUNCAO_FIM:
-//                    cont++;
                     resultado = resultado + "Linha: " + cont + "<Fim_bloco>" + lexer.lexeme + "\n";
                     break;       
                     
                 case SE:
-//                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<Inicio_se>" + lexer.lexeme + "\n";
                     break;      
                     
                 case SE_FIM:
-//                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<Fim_se>" + lexer.lexeme + "\n";
                     break;
                     
                case ESE:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Incio_ese>" + lexer.lexeme + "\n";
                    break;         
                    
                case ESE_FIM:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Fim_ese>" + lexer.lexeme + "\n";
                    break;    
                    
                case SENAO:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Inicio_senao>" + lexer.lexeme + "\n";
                    break;  
                    
                case SENAO_FIM:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Fim_senao>" + lexer.lexeme + "\n";
                    break; 
                    
                 case REPETICAO:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Inicio_repeticao>" + lexer.lexeme + "\n";
                    break; 
                    
                 case REPETICAO_FIM:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Fim_repeticao>" + lexer.lexeme + "\n";
                    break; 
                  
                 case ENQUANTO:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Incio_enquanto>" + lexer.lexeme + "\n";
                    break; 
                    
                 case ENQUANTO_FIM:
-//                  cont ++;
                   resultado = resultado + "Linha: " + cont + "<Fim_enquanto>" + lexer.lexeme + "\n";
                   break;   
                   
                 case ESCREVA:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Escreva>" + lexer.lexeme + "\n";
                    break;  
                    
                 case LEIA:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Leia>" + lexer.lexeme + "\n";
                    break; 
                    
                 case RETORNA:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Retorna>" + lexer.lexeme + "\n";
                    break;                   
                    
                 case IDENTIFICADOR:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Identificador>" + lexer.lexeme + "\n";
                    break;  
 
                 case INTEIRO:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
                    break;
                    
                 case REAL:
-//                   cont ++;
                    resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
                    break;                   
                
                 case ERROR:
-//                   cont ++;
                    resultado = resultado + "Erro na linha " + cont + ": Símbolo não reconhecido \n" ;   
                    break;           
                    
                 default:
-//                    cont ++;
                     resultado = resultado + "Linha: " + cont + "<" + lexer.lexeme +">" + cont++;
                     break;                
            }
-       }
-            
+       }       
+    }
+    
+    public void executarSintatico()throws Exception{ 
+        String ST = textArea1.getText();
+        Parser s = new Parser(new analisador.Yylex(new StringReader(ST)));
+        
+        try {
+            s.parse();
+            textArea2.setText("Análise realizada corretamente");
+        } catch (Exception ex) {
+            Symbol sym = s.getS();
+            textArea2.setText("Erro de Sintaxe: Linha: " + (sym.right + 1) + ", Coluna: " + (sym.left + 1) + "\nTexto: \"" + sym.value + "\"");
+        }
     }
 
     /**
@@ -349,8 +316,8 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(HeaderLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
                     .addGroup(HeaderLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -603,13 +570,11 @@ public class Interface extends javax.swing.JFrame {
             if(value.equals("Léxica")){
                 executar();
             }
-
             else{
-                textArea2.setText("teste");
+                executarSintatico();
             }
-
-        }catch(Exception e)
-        {e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }//GEN-LAST:event_compileBtnActionPerformed
 
