@@ -7,6 +7,8 @@
 <h3 align="center">
   O que é?
   <span> · </span>
+  Iniciando o Programa
+  <span> · </span>
   Requisitos
   <span> · </span>
   Primeiros Passos
@@ -19,9 +21,12 @@
 
 ## 📋 O que é?
 
-O analisador léxico e sintático é um projeto desenvolvido pelos alunos André Arantes, Livia Granato e Victor Pereira para a disciplina de Compiladores do curso de Engenharia da Computação da Universidade Federal de Itajubá. A partir de uma linguagem criada e especificada totalmente pelos alunos, o projeto tem por objetivo verificar uma implementação correta do código avaliando em dois critérios: <b>Avaliação Léxica</b> e <b>Avaliação Sintática</b>.
+O analisador léxico e sintático é um projeto desenvolvido na linguagem de programação Java pelos alunos André Arantes, Livia Granato e Victor Pereira para a disciplina de Compiladores do curso de Engenharia da Computação da Universidade Federal de Itajubá. A partir de uma linguagem criada e especificada totalmente pelos alunos, o projeto tem por objetivo verificar uma implementação correta do código avaliando em dois critérios: <b>Avaliação Léxica</b> e <b>Avaliação Sintática</b>.
 
-Ao inserir um código, especificar um tipo de análise e realizar o processo de compilação (através do botão <i>COMPILAR</i>), a interface criada (tentamos tornar o mais similar de uma IDE) denominada <i>Codekit</i> será responsável por exibir os retornos e resultados da análise para o código, assim como apresentar possíveis erros durante a escrita. 
+##  Iniciando o Programa
+Ao executar o projeto e inserir um código na entrada, especifique um tipo de análise e realize o processo de compilação (através do botão COMPILAR). 
+
+A interface criada (tentamos tornar o mais similar a uma IDE) denominada <i>Codekit</i> será responsável por exibir os retornos e resultados da análise para o código na saída, assim como apresentar possíveis erros durante a escrita. 
 
 ## 📖 Requisitos
 
