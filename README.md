@@ -51,7 +51,7 @@ São responsáveis por criar os arquivos auxiliares a serem utilizados no códig
 O arquivo gerado tokens.java é responsável por manter o identificador de todos os tokens da nossa linguagem.
 
 <li><b>Parser.cup</b></li>
-É o principal arquivo responsável por verificar o código sintaticamente. Para isso, define-se quais identificadores serão <b>terminais</b> e <b>não-terminais</b>, uma vez será realizada a derivação do código até obtermos apenas símbolos terminais, de forma que o compilador possa interpretar o código inserido.
+É o principal arquivo responsável por verificar o código sintaticamente. Para isso, define-se quais identificadores serão <b>terminais</b> e <b>não-terminais</b>, uma vez será realizada a derivação do código até obtermos os identificadores iniciais, de forma que o compilador possa interpretar o código inserido.
 
 <li><b>Sym.java</b></li>
 Contém todos os símbolos terminais como tokens servindo como auxiliar do Yylex.java.
