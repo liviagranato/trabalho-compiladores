@@ -21,6 +21,7 @@ DIGITO = [0-9]
 INTEIRO = [- | ]?{DIGITO}+
 REAL = [- | ]?{DIGITO}+("."){DIGITO}+
 IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
+STRING = (("\""(.)*"\"") | ("\'"(.)*"\'"))
 WHITE=[ \t\r\n]
 
 %{
@@ -30,13 +31,12 @@ public String lexeme;
 {WHITE} {/*Ignore*/}
 
 /*Operadores Aritméticos */
-("X" | "/" | "¨" | "%" )    {return new Symbol(Sym.OP_ARITMETICO, yychar, yyline, yytext());}
-
-/*Operador Soma*/
 ("+") {return new Symbol(Sym.OP_SOMA, yychar, yyline, yytext());}
-
-/*Operador Subtração*/
 ("-") {return new Symbol(Sym.OP_SUBTRACAO, yychar, yyline, yytext());}
+("*") {return new Symbol(Sym.OP_MULTIPLICACAO, yychar, yyline, yytext());}
+("/") {return new Symbol(Sym.OP_DIVISAO, yychar, yyline, yytext());}
+("^") {return new Symbol(Sym.OP_EXPONENCIACAO, yychar, yyline, yytext());}
+("%") {return new Symbol(Sym.OP_MOD, yychar, yyline, yytext());}
 
 /* Operadores Lógicos */
 ("E" | "OU")  {return new Symbol(Sym.OP_LOGICO, yychar, yyline, yytext());}
@@ -59,8 +59,6 @@ public String lexeme;
 ("]")   {return new Symbol(Sym.FECHA_COLCHETES, yychar, yyline, yytext());}
 (";")   {return new Symbol(Sym.PONTO_VIRGULA, yychar, yyline, yytext());}
 (",")   {return new Symbol(Sym.VIRGULA, yychar, yyline, yytext());}
-("\"")  {return new Symbol(Sym.ASPAS_DUPLAS, yychar, yyline, yytext());}
-("\'")  {return new Symbol(Sym.ASPAS_SIMPLES, yychar, yyline, yytext());}
 
 /* Comentarios */
 ("##"(.)* | "#"(.)*"#" )   {;}
@@ -117,6 +115,7 @@ public String lexeme;
 ("RETORNA")   {return new Symbol(Sym.RETORNA, yychar, yyline, yytext());}
 
 {IDENTIFICADOR} {return new Symbol(Sym.IDENTIFICADOR, yychar, yyline, yytext());}
+{STRING} {return new Symbol(Sym.STRING, yychar, yyline, yytext());}
 {INTEIRO} {return new Symbol(Sym.INTEIRO, yychar, yyline, yytext());}
 {REAL} {return new Symbol(Sym.REAL, yychar, yyline, yytext());}
 
