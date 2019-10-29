@@ -31,6 +31,29 @@ Para execução do programa, é necessário ter o ambiente Netbeans IDE instalad
 
 Para programar na linguagem "VAL", disponibilizamos o arquivo <b>Linguagens_Formais.pdf</b> onde especificamos todos os tokens que poderão ser utilizados, além de demonstrar também os compiladores acionados por eles durante o processo de compilação.
 
+<b>Como Utilizar Corretamente as Bibliotecas</b>
+O projeto possuirá alguns arquivos principais para gerar uma linguagem: <b>Lexer.flex</b>, <b>Parser.cup</b>, <b>Token.java</b>, <b>Sym.java</b> e <b>Yylex.java</b>.
+
+<i>Obs: Alguns desses arquivos são gerados automaticamente após o processo de execução da main no projeto</i>
+
+<b>Lexer.flex</b>
+É responsável por criar os lexemes, ou seja, as entradas para o compilador. Sendo assim, nele especificaremos tudo que estiver relacionado aos nossos tokens de entrada (como exemplo, uma <i>int main()</i> em C, se torna <MAIN></MAIN> em VAL). Sendo assim, especificaremos todos os nossos returns baseados em como esses tokens serão chamados na linguagem, além dos tipos de variáveis que iremos trabalhar (inteiro, digito, real, booleano, string e outros).
+
+<b>MainLex.java | MainSint.java</b>
+São responsáveis por criar os arquivos auxiliares a serem utilizados no código. Como exemplo, ao executar a MainLex.java, obteremos o arquivo Lexer.java, necessário para a verificação dos tokens por nossa interface.
+
+<b>Token.java</b>
+O arquivo gerado tokens.java é responsável por manter o identificador de todos os tokens da nossa linguagem.
+
+<b>Parser.cup</b>
+É o principal arquivo responsável por verificar o código sintaticamente. Para isso, define-se quais identificadores serão <b>terminais</b> e <b>não-terminais</b>, uma vez será realizada a derivação do código até obtermos apenas símbolos terminais, de forma que o compilador possa interpretar o código inserido.
+
+<b>Sym.java</b>
+Contém todos os símbolos terminais como tokens servindo como auxiliar do Yylex.java.
+
+<b>Yylex.java</b>
+Por fim, o Yylex.java será o arquivo responsável por gerar os retornos para a interface dos resultados obtidos a partir da análise sintática, tomando como base os tokens especificados e como as estruturas deverão ser montadas. Por exemplo, sabemos que uma função principal deve ser precedida por um conjunto de operações dentro dela. Caso esse critério não seja cumprido, obteremos um erro sintático do código.
+
 ## Comandos Úteis
 1. Comando para compilar o Parser.cup:
 
