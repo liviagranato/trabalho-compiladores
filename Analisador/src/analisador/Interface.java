@@ -58,11 +58,7 @@ public class Interface extends javax.swing.JFrame {
                 case LINHA:                    
                     cont ++;
                     break;
-                    
-                case OP_ARITMETICO:
-                    resultado = resultado + "Linha: " + cont + "<Operador_Aritmético> "  + lexer.lexeme + "\n"; 
-                    break;
-                    
+                                       
                 case OP_SOMA:
                     resultado = resultado + "Linha: " + cont + "<Operador_Soma> "  + lexer.lexeme + "\n"; 
                     break;
@@ -70,6 +66,22 @@ public class Interface extends javax.swing.JFrame {
                 case OP_SUBTRACAO:
                     resultado = resultado + "Linha: " + cont + "<Operador_Subtração> "  + lexer.lexeme + "\n"; 
                     break;                    
+
+                case OP_MULTIPLICACAO:
+                    resultado = resultado + "Linha: " + cont + "<Operador_Multiplicação> "  + lexer.lexeme + "\n"; 
+                    break;
+                    
+                case OP_DIVISAO:
+                    resultado = resultado + "Linha: " + cont + "<Operador_Divisão> "  + lexer.lexeme + "\n"; 
+                    break;
+                    
+                case OP_EXPONENCIACAO:
+                    resultado = resultado + "Linha: " + cont + "<Operador_Exponenciação> "  + lexer.lexeme + "\n"; 
+                    break;
+                    
+                case OP_MOD:
+                    resultado = resultado + "Linha: " + cont + "<Operador_Módulo> "  + lexer.lexeme + "\n"; 
+                    break; 
                     
                 case OP_LOGICO:
                     resultado = resultado + "Linha: " + cont + "<Operador_Lógico> "  + lexer.lexeme + "\n";
@@ -201,14 +213,18 @@ public class Interface extends javax.swing.JFrame {
                    
                 case IDENTIFICADOR:
                    resultado = resultado + "Linha: " + cont + "<Identificador>" + lexer.lexeme + "\n";
-                   break;  
+                   break;
+                   
+                case STRING:
+                   resultado = resultado + "Linha: " + cont + "<String>" + lexer.lexeme + "\n";
+                   break;                   
 
                 case INTEIRO:
-                   resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
+                   resultado = resultado + "Linha: " + cont + "<Inteiro>" + lexer.lexeme + "\n";
                    break;
                    
                 case REAL:
-                   resultado = resultado + "Linha: " + cont + "<Numero>" + lexer.lexeme + "\n";
+                   resultado = resultado + "Linha: " + cont + "<Real>" + lexer.lexeme + "\n";
                    break;                   
                
                 case ERROR:
@@ -228,10 +244,10 @@ public class Interface extends javax.swing.JFrame {
         
         try {
             s.parse();
-            textArea2.setText("Análise realizada corretamente");
+            textArea2.setText("Análise realizada corretamente!");
         } catch (Exception ex) {
             Symbol sym = s.getS();
-            textArea2.setText("Erro de Sintaxe: Linha: " + (sym.right + 1) + ", Coluna: " + (sym.left + 1) + "\nTexto: \"" + sym.value + "\"");
+            textArea2.setText("Erro de Sintaxe: \nLinha: " + (sym.right) + " - Texto: " + sym.value);
         }
     }
 

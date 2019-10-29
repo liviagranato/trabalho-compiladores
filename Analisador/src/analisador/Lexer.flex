@@ -10,6 +10,7 @@ DIGITO = [0-9]
 INTEIRO = [- | ]?{DIGITO}+
 REAL = [- | ]?{DIGITO}+("."){DIGITO}+
 IDENTIFICADOR = {CARACTERE}({CARACTERE} | {DIGITO})*
+STRING = (("\""(.)*"\"") | ("\'"(.)*"\'"))
 WHITE=[ \t\r]
 
 %{
@@ -22,13 +23,12 @@ public String lexeme;
 ( "\n" )    {lexeme = yytext(); return LINHA;}
 
 /*Operadores Aritméticos */
-( "X" | "/" | "¨" | "%" ) {lexeme = yytext(); return OP_ARITMETICO;}
-
-/*Operador Soma*/
 ("+") {lexeme = yytext(); return OP_SOMA;}
-
-/*Operador Subtração*/
 ("-") {lexeme = yytext(); return OP_SUBTRACAO;}
+("*") {lexeme = yytext(); return OP_MULTIPLICACAO;}
+("/") {lexeme = yytext(); return OP_DIVISAO;}
+("^") {lexeme = yytext(); return OP_EXPONENCIACAO;}
+("%") {lexeme = yytext(); return OP_MOD;}
 
 /* Operadores Lógicos */
 ("E" | "OU")    {lexeme = yytext(); return OP_LOGICO;}
@@ -51,8 +51,6 @@ public String lexeme;
 ("]")   {lexeme = yytext(); return FECHA_COLCHETES;}
 (";")   {lexeme = yytext(); return PONTO_VIRGULA;}
 (",")   {lexeme = yytext(); return VIRGULA;}
-("\"")  {lexeme = yytext(); return ASPAS_DUPLAS;}
-("\'")  {lexeme = yytext(); return ASPAS_SIMPLES;}
 
 /* Comentarios */
 ("##"(.)* | "#"(.)*"#" )   {lexeme = yytext(); return COMENTARIO;}
@@ -109,6 +107,7 @@ public String lexeme;
 ("RETORNA")   {lexeme = yytext(); return RETORNA;}
 
 {IDENTIFICADOR} {lexeme=yytext(); return IDENTIFICADOR;}
+{STRING} {lexeme=yytext(); return STRING;}
 {INTEIRO} {lexeme=yytext(); return INTEIRO;}
 {REAL} {lexeme=yytext(); return REAL;}
 

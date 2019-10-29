@@ -26,13 +26,14 @@ parser code
 }
 :};
 
-terminal OP_ARITMETICO, OP_SOMA, OP_SUBTRACAO, OP_LOGICO, OP_NEGACAO, OP_RELACIONAL, OP_IGUAL, OP_DIFERENTE, OP_BOOLEANO, ABRE_PARENTESES, FECHA_PARENTESES, ABRE_COLCHETES, FECHA_COLCHETES, PONTO_VIRGULA, VIRGULA, ASPAS_DUPLAS, ASPAS_SIMPLES,  COMENTARIO, PRINCIPAL, FIM, FUNCAO, FUNCAO_FIM, SE, SE_FIM, ESE, ESE_FIM, SENAO, SENAO_FIM, REPETICAO, REPETICAO_FIM, ENQUANTO, ENQUANTO_FIM, ESCREVA, LEIA, RETORNA, IDENTIFICADOR, INTEIRO, REAL, ERROR;
+terminal OP_SOMA, OP_SUBTRACAO, OP_MULTIPLICACAO, OP_DIVISAO, OP_EXPONENCIACAO, OP_MOD, OP_LOGICO, OP_NEGACAO, OP_RELACIONAL, OP_IGUAL, OP_DIFERENTE, OP_BOOLEANO, ABRE_PARENTESES, FECHA_PARENTESES, ABRE_COLCHETES, FECHA_COLCHETES, PONTO_VIRGULA, VIRGULA, COMENTARIO, PRINCIPAL, FIM, FUNCAO, FUNCAO_FIM, SE, SE_FIM, ESE, ESE_FIM, SENAO, SENAO_FIM, REPETICAO, REPETICAO_FIM, ENQUANTO, ENQUANTO_FIM, ESCREVA, LEIA, RETORNA, IDENTIFICADOR, STRING, INTEIRO, REAL;
 
 
-non terminal programa, funcoes, operacoes, comandos, condicional, condicional_simples, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos,
-comandos_relacionais, comandos_aritmeticos, numeros, vetor, vetor_inteiro, vetor_real,
-vetor_string, string, variavel, parametro, loop, loop_repeticao, loop_enquanto, iterador,
-iterador_digito, iterador_variavel;
+non terminal programa, funcoes, operacoes, comandos, condicional, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos, comandos_relacionais, expressao, expressao_result, incremento, decremento, retorno, numeros, vetor, vetor_inteiro, vetor_real, vetor_string, parametro, loop, loop_repeticao, loop_enquanto, iterador, iterador_digito, iterador_variavel;
+
+precedence left OP_SOMA, OP_SUBTRACAO;
+precedence left OP_MULTIPLICACAO, OP_DIVISAO;
+precedence left OP_EXPONENCIACAO, OP_MOD;
 
 start with programa;
 
@@ -41,35 +42,36 @@ programa ::= PRINCIPAL operacoes FIM
         |  funcoes PRINCIPAL operacoes FIM
         ;	
 
-funcoes ::= FUNCAO chamada operacoes RETORNA variavel FUNCAO_FIM funcoes 
-       | FUNCAO chamada operacoes RETORNA variavel FUNCAO_FIM
+funcoes ::= FUNCAO chamada operacoes FUNCAO_FIM funcoes 
+       | FUNCAO chamada operacoes FUNCAO_FIM
        ;
 
 operacoes ::= comandos 
-         | comandos operacoes 
-         | condicional 
+         | operacoes comandos 
+         | condicional
+         | operacoes condicional
          | loop 
-         | loop operacoes
+         | operacoes loop
+         | expressao
          ;
 
-comandos ::= comandos_aritmeticos 
-        | imprime 
+comandos ::= imprime 
         | escaneia 
         | atribuicao 
         | chamada
+        | retorno
+        | incremento
+        | decremento
+        | COMENTARIO
         ;
 
 //Estruturas condicionais
-condicional ::= condicional_simples 
-           | condicional_simples condicional
-           ; 
-
-condicional_simples ::= SE condicao operacoes SE_FIM 
-                   | SE condicao operacoes SE_FIM condicional_composta
+condicional ::= SE ABRE_COLCHETES condicao FECHA_COLCHETES operacoes SE_FIM 
+                   | SE ABRE_COLCHETES condicao FECHA_COLCHETES operacoes SE_FIM condicional_composta
                    ;
 
-condicional_composta ::= ESE condicao operacoes ESE_FIM 
-                    | ESE condicao operacoes ESE_FIM condicional_composta
+condicional_composta ::= ESE ABRE_COLCHETES condicao FECHA_COLCHETES operacoes ESE_FIM 
+                    | ESE ABRE_COLCHETES condicao FECHA_COLCHETES operacoes ESE_FIM condicional_composta
                     | SENAO operacoes SENAO_FIM
                     ;
 
@@ -79,52 +81,66 @@ condicao ::= comandos_relacionais
 
 
 //Comandos executaveis
-imprime ::= ESCREVA variavel 
-       | ESCREVA string 
-       | ESCREVA numeros
+imprime ::= ESCREVA expressao
+       | ESCREVA chamada
        ;
 
-escaneia ::= LEIA INTEIRO 
-        | LEIA string 
-        | LEIA REAL
+escaneia ::= LEIA IDENTIFICADOR
         ;
 
 chamada ::= IDENTIFICADOR ABRE_PARENTESES parametro FECHA_PARENTESES 
        | IDENTIFICADOR ABRE_PARENTESES FECHA_PARENTESES
        ;
 
-atribuicao ::= ABRE_PARENTESES numeros FECHA_PARENTESES 
-          | ABRE_PARENTESES OP_BOOLEANO FECHA_PARENTESES 
-          | ABRE_PARENTESES string FECHA_PARENTESES 
-          | ABRE_PARENTESES vetor FECHA_PARENTESES
+atribuicao ::= IDENTIFICADOR ABRE_PARENTESES numeros FECHA_PARENTESES 
+          | IDENTIFICADOR ABRE_PARENTESES OP_BOOLEANO FECHA_PARENTESES 
+          | IDENTIFICADOR ABRE_PARENTESES STRING FECHA_PARENTESES 
+          | IDENTIFICADOR ABRE_PARENTESES vetor FECHA_PARENTESES
           ;
 
 comandos_logicos ::= comandos_relacionais OP_LOGICO comandos_relacionais 
                 | comandos_relacionais OP_NEGACAO OP_LOGICO comandos_relacionais 
                 | OP_NEGACAO comandos_relacionais
+                | comandos_relacionais OP_LOGICO comandos_relacionais OP_LOGICO condicao
                 ;
 
-comandos_relacionais ::= variavel OP_RELACIONAL variavel 
-                    | variavel OP_RELACIONAL numeros 
-                    | variavel OP_IGUAL variavel 
-                    | variavel OP_IGUAL numeros 
-                    | variavel OP_IGUAL OP_BOOLEANO 
-                    | variavel OP_DIFERENTE variavel 
-                    | variavel OP_DIFERENTE numeros 
-                    | variavel OP_RELACIONAL string
+comandos_relacionais ::=  expressao_result 
                     ;
 
-comandos_aritmeticos ::= variavel OP_ARITMETICO variavel 
-                    | variavel OP_ARITMETICO numeros 
-                    | variavel OP_SOMA variavel 
-                    | variavel OP_SOMA numeros 
-                    | variavel OP_SUBTRACAO variavel 
-                    | variavel OP_SUBTRACAO numeros 
-                    | string OP_SOMA string 
-                    | string OP_SOMA variavel 
-                    | variavel OP_SOMA string
-                    ;
+expressao_result ::= expressao OP_IGUAL IDENTIFICADOR
+                | expressao OP_IGUAL numeros
+                | expressao OP_RELACIONAL IDENTIFICADOR
+                | expressao OP_RELACIONAL numeros
+                | expressao OP_DIFERENTE IDENTIFICADOR
+                | expressao OP_DIFERENTE numeros
+                | expressao OP_IGUAL OP_BOOLEANO
+                | expressao OP_IGUAL STRING
+                | expressao OP_DIFERENTE STRING
+                ; 
 
+expressao ::= expressao OP_SOMA expressao
+        | expressao OP_SUBTRACAO expressao
+        | expressao OP_MULTIPLICACAO expressao
+        | expressao OP_DIVISAO expressao
+        | expressao OP_EXPONENCIACAO expressao
+        | expressao OP_MOD expressao
+        | ABRE_PARENTESES expressao FECHA_PARENTESES
+        | numeros
+        | IDENTIFICADOR
+        | STRING     
+        ;
+
+incremento ::=  IDENTIFICADOR OP_SOMA OP_SOMA
+          ;
+
+decremento ::= IDENTIFICADOR OP_SUBTRACAO OP_SUBTRACAO
+          ;
+
+retorno ::= RETORNA IDENTIFICADOR
+       | RETORNA STRING
+       | RETORNA numeros
+       | RETORNA OP_BOOLEANO
+       ;
 
 //Estrutura de dados
 numeros ::= INTEIRO 
@@ -144,15 +160,9 @@ vetor_real ::= REAL VIRGULA REAL
           | REAL VIRGULA vetor_real
           ;
 
-vetor_string ::= string VIRGULA string 
-            | string VIRGULA vetor_string
+vetor_string ::= STRING VIRGULA STRING 
+            | STRING VIRGULA vetor_string
             ;
-
-string ::= ASPAS_DUPLAS IDENTIFICADOR ASPAS_DUPLAS 
-      | ASPAS_SIMPLES IDENTIFICADOR ASPAS_SIMPLES
-      ;
-
-variavel ::= IDENTIFICADOR atribuicao;
 
 parametro ::= IDENTIFICADOR 
          | IDENTIFICADOR VIRGULA parametro
@@ -173,10 +183,10 @@ iterador ::= iterador_digito
         ;
 
 //trocar numero por inteiro
-iterador_digito ::= variavel ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA variavel OP_RELACIONAL INTEIRO PONTO_VIRGULA variavel OP_SOMA OP_SOMA 
-               | variavel ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA variavel OP_RELACIONAL INTEIRO PONTO_VIRGULA variavel OP_SUBTRACAO OP_SUBTRACAO
+iterador_digito ::= IDENTIFICADOR ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA IDENTIFICADOR OP_RELACIONAL INTEIRO PONTO_VIRGULA incremento 
+               | IDENTIFICADOR ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA IDENTIFICADOR OP_RELACIONAL INTEIRO PONTO_VIRGULA decremento
                ;
 
-iterador_variavel ::= variavel ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA variavel OP_RELACIONAL variavel PONTO_VIRGULA variavel OP_SOMA OP_SOMA 
-                 | variavel ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA variavel OP_RELACIONAL variavel PONTO_VIRGULA variavel OP_SUBTRACAO OP_SUBTRACAO
+iterador_variavel ::= IDENTIFICADOR ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PONTO_VIRGULA incremento 
+                 | IDENTIFICADOR ABRE_PARENTESES INTEIRO FECHA_PARENTESES PONTO_VIRGULA IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PONTO_VIRGULA decremento
                  ;
