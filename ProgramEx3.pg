@@ -16,7 +16,7 @@
         RETORNA "O seu vetor tem mais numeros pares"
     </SE>
     <ESE> [par = impar]
-        RETORNA "O seu vetor o mesmo numero de numeros pares e impares"
+        RETORNA "O seu vetor tem a mesma quantidade de numeros pares e impares"
     </ESE>
     <SENAO>
         RETORNA "O seu vetor tem mais numeros impares"
