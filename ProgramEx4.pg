@@ -1,0 +1,30 @@
+<FUNCTION> percorreNumero(numero)
+    par(0)	
+    impar(0)
+    i(0)
+    
+    <ENQ> [i < numero]
+        <SE> [ i % 2 = 0 ]
+            par++
+        </SE>
+        <SENAO>
+            impar++
+        </SENAO>
+        i++
+    </ENQ>	
+
+    <SE> [par > impar]
+        RETORNA "Foram encontrados mais numeros pares"
+    </SE>
+    <ESE> [par = impar]
+        RETORNA "Foi encontrada a mesma quantidade de numeros pares e impares"
+    </ESE>
+    <SENAO>
+        RETORNA "Foram encontrados mais numeros impares"
+    </SENAO>
+</FUNCTION>
+
+<MAIN>
+    numero(10)
+    << percorreNumero(numero)  ##printa o retorno
+</MAIN>
