@@ -29,7 +29,7 @@ parser code
 terminal OP_SOMA, OP_SUBTRACAO, OP_MULTIPLICACAO, OP_DIVISAO, OP_EXPONENCIACAO, OP_MOD, OP_LOGICO, OP_NEGACAO, OP_RELACIONAL, OP_IGUAL, OP_DIFERENTE, OP_BOOLEANO, ABRE_PARENTESES, FECHA_PARENTESES, ABRE_COLCHETES, FECHA_COLCHETES, PONTO_VIRGULA, VIRGULA, COMENTARIO, PRINCIPAL, FIM, FUNCAO, FUNCAO_FIM, SE, SE_FIM, ESE, ESE_FIM, SENAO, SENAO_FIM, REPETICAO, REPETICAO_FIM, ENQUANTO, ENQUANTO_FIM, ESCREVA, LEIA, RETORNA, IDENTIFICADOR, STRING, INTEIRO, REAL;
 
 
-non terminal programa, funcoes, operacoes, comandos, condicional, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos, comandos_relacionais, expressao, expressao_result, incremento, decremento, retorno, numeros, vetor, vetor_inteiro, vetor_real, vetor_string, parametro, loop, loop_repeticao, loop_enquanto, iterador, iterador_digito, iterador_variavel;
+non terminal programa, funcoes, operacoes, comandos, condicional, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos, comandos_relacionais, expressao, expressao_result, incremento, decremento, retorno, numeros, vetor, vetor_inteiro, vetor_real, vetor_string, vetor_pos, parametro, loop, loop_repeticao, loop_enquanto, iterador, iterador_digito, iterador_variavel;
 
 precedence left OP_SOMA, OP_SUBTRACAO;
 precedence left OP_MULTIPLICACAO, OP_DIVISAO;
@@ -127,7 +127,8 @@ expressao ::= expressao OP_SOMA expressao
         | ABRE_PARENTESES expressao FECHA_PARENTESES
         | numeros
         | IDENTIFICADOR
-        | STRING     
+        | STRING
+        | vetor_pos     
         ;
 
 incremento ::=  IDENTIFICADOR OP_SOMA OP_SOMA
@@ -163,6 +164,10 @@ vetor_real ::= REAL VIRGULA REAL
 vetor_string ::= STRING VIRGULA STRING 
             | STRING VIRGULA vetor_string
             ;
+
+vetor_pos ::= IDENTIFICADOR ABRE_COLCHETES IDENTIFICADOR FECHA_COLCHETES
+         | IDENTIFICADOR ABRE_COLCHETES INTEIRO FECHA_COLCHETES 
+         ;
 
 parametro ::= IDENTIFICADOR 
          | IDENTIFICADOR VIRGULA parametro
