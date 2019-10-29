@@ -42,7 +42,7 @@ O projeto possuirá alguns arquivos principais para gerar uma linguagem: <b>Lexe
 <i>Obs: Alguns desses arquivos são gerados automaticamente após o processo de execução da main no projeto</i>
 <ol>
 <li><b>Lexer.flex</b></li>
-É responsável por criar os lexemes, ou seja, as entradas para o compilador. Sendo assim, nele especificaremos tudo que estiver relacionado aos nossos tokens de entrada (como exemplo, uma <i>int main()</i> em C, se torna <MAIN></MAIN> em VAL). Sendo assim, especificaremos todos os nossos returns baseados em como esses tokens serão chamados na linguagem, além dos tipos de variáveis que iremos trabalhar (inteiro, digito, real, booleano, string e outros).
+É responsável por criar os lexemes, ou seja, as entradas para o compilador. Sendo assim, nele especificaremos tudo que estiver relacionado aos nossos tokens de entrada (como exemplo, uma <i>int main()</i> em C, se torna MAIN /MAIN em VAL). Sendo assim, especificaremos todos os nossos returns baseados em como esses tokens serão chamados na linguagem, além dos tipos de variáveis que iremos trabalhar (inteiro, digito, real, booleano, string e outros).
 
 <li><b>MainLex.java | MainSint.java</b></li>
 São responsáveis por criar os arquivos auxiliares a serem utilizados no código. Como exemplo, ao executar a MainLex.java, obteremos o arquivo Lexer.java, necessário para a verificação dos tokens por nossa interface.
