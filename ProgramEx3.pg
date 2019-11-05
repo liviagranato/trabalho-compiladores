@@ -3,7 +3,7 @@
     impar(0)
     i(0)
     <ENQ> [i < 10]
-        <SE> [ i % 2 = 0 ]
+        <SE> [ vetor[i] % 2 = 0 ]
             par++
         </SE>
         <SENAO>
