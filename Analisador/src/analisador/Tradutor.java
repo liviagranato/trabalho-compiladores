@@ -1,8 +1,13 @@
 package analisador;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static jflex.Skeleton.line;
 
 public class Tradutor {
   int i=0;
@@ -10,14 +15,47 @@ public class Tradutor {
   public void Traduzir(String codigo){
     char [] letras = codigo.toCharArray();
     String aux = "";
-    String codigo_traduzido = "";
+    String codigo_traduzido = "#include <stdio.h> \n\n";
+    String nomeFuncao = "";
     String parametro = "";
     String identificador = "";
-    String tipo_variavel = "";
+    String tipo_variavel = "void ";
     String comentario = "";
     
     for(i=0; i < letras.length; i++){
         aux += letras[i];
+        
+        Pattern pattern_1 = Pattern.compile("\"([^\"]*)\"");
+        Matcher matcher_1 = pattern_1.matcher(aux);
+        
+        Pattern pattern_2 = Pattern.compile("([^\"]*)\n");
+        Matcher matcher_2 = pattern_2.matcher(aux);
+        
+        Pattern pattern_3 = Pattern.compile("([^\"]*)\\(([^\"]*)\\)");
+        Matcher matcher_3 = pattern_3.matcher(aux);
+        
+        if (matcher_1.find()) {
+            parametro += matcher_1.group(1) +"\");\n";
+            codigo_traduzido += parametro;
+            aux = "";
+            parametro = "";
+        }
+        
+        if (matcher_2.find()) {
+            identificador += matcher_2.group(1);
+            if(!identificador.equals("")){
+                identificador += ");\n";
+                codigo_traduzido += identificador;
+            }
+            aux = "";
+            identificador = "";
+        }
+        
+        if (matcher_3.find()) {
+            nomeFuncao += matcher_3.group(1);
+            System.out.println("\nResultado: " + nomeFuncao);
+        }
+        
         switch(aux){    
             //case p/ comentários
             case "##":
@@ -91,23 +129,15 @@ public class Tradutor {
             break;
                 
             case "<< ":
-                codigo_traduzido += "printf();";
+                codigo_traduzido += "\tprintf(\"";
                 aux = "";
             break;
             
             case ">> ":
-                codigo_traduzido += "scanf();";
+                codigo_traduzido += "\tscanf(\"%d\","+identificador;
                 aux = "";
             break;
-                
-            case "\n":
-                codigo_traduzido += "\n";
-                aux = "";
-            break;
-            
-            case "\"\"":
-            break;
-                
+                        
             case "falso":
                 codigo_traduzido += "false";
                 aux = "";
@@ -119,12 +149,12 @@ public class Tradutor {
             break;    
             
             case "<MAIN>":
-                codigo_traduzido += "void main(){";
+                codigo_traduzido += "void main(){\n";
                 aux = "";
             break;
             
             case "</MAIN>":
-                codigo_traduzido += "\n }";
+                codigo_traduzido += "}";
                 aux = "";
             break;
                 
@@ -196,12 +226,12 @@ public class Tradutor {
             case "<FUNCTION>":
                 //Tipo_variável = char || int || float
                 //Identificador =  nome da função
-                codigo_traduzido += tipo_variavel + identificador + "(){";
+                codigo_traduzido += tipo_variavel + identificador + "(" + parametro + "){";
                 aux = "";
             break;
                  
             case "</FUNCTION>":
-                codigo_traduzido += "\n }";
+                codigo_traduzido += "}\n\n";
                 aux = "";
             break;
         }
