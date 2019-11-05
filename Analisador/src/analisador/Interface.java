@@ -5,6 +5,7 @@
  */
 package analisador;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -21,7 +22,7 @@ import javax.swing.JTextArea;
  */
 public class Interface extends javax.swing.JFrame {
     public JTextArea jText;
-      
+    public Tradutor tradutor =  new Tradutor();
     /**
      * Creates new form Novo
      */
@@ -245,6 +246,7 @@ public class Interface extends javax.swing.JFrame {
         try {
             s.parse();
             textArea2.setText("Análise realizada corretamente!");
+            tradutor.Traduzir(textArea1.getText());
         } catch (Exception ex) {
             Symbol sym = s.getS();
             textArea2.setText("Erro de Sintaxe: \nLinha: " + (sym.right) + " - Texto: " + sym.value);
@@ -265,7 +267,7 @@ public class Interface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         importBtn = new javax.swing.JLabel();
-        jLabel915 = new javax.swing.JLabel();
+        theme = new javax.swing.JLabel();
         Sidebar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         compileBtn = new javax.swing.JButton();
@@ -309,7 +311,12 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jLabel915.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/info.png"))); // NOI18N
+        theme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/code.png"))); // NOI18N
+        theme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                themeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -320,33 +327,33 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1245, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1262, Short.MAX_VALUE)
                 .addComponent(importBtn)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel915)
-                .addGap(65, 65, 65))
+                .addGap(31, 31, 31)
+                .addComponent(theme)
+                .addGap(53, 53, 53))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(HeaderLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addGroup(HeaderLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel915))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(importBtn)))
+                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(HeaderLayout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(importBtn))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MainFrame.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1600, 80));
 
-        Sidebar.setBackground(new java.awt.Color(48, 50, 62));
+        Sidebar.setBackground(new java.awt.Color(35, 35, 43));
+        Sidebar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -434,12 +441,12 @@ public class Interface extends javax.swing.JFrame {
                             .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(ComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(SidebarLayout.createSequentialGroup()
                     .addGap(40, 40, 40)
                     .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(220, Short.MAX_VALUE)))
+                    .addContainerGap(214, Short.MAX_VALUE)))
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +458,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(ComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(17, 17, 17)
@@ -463,7 +470,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(SidebarLayout.createSequentialGroup()
                     .addGap(318, 318, 318)
                     .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(709, Short.MAX_VALUE)))
+                    .addContainerGap(703, Short.MAX_VALUE)))
         );
 
         MainFrame.add(Sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1191, -30, 410, 1030));
@@ -594,6 +601,33 @@ public class Interface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_compileBtnActionPerformed
 
+    private void themeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themeMouseClicked
+        //Possibilidade de Alterações nas Cores do Tema
+        MainFrame.setBackground(Color.WHITE);
+        textArea2.setBackground(Color.WHITE);
+        
+        textArea1.setBackground(new Color(240,240,240));
+        Header.setBackground(new Color(240,240,240));
+        Sidebar1.setBackground(new Color(240,240,240));
+        Sidebar.setBackground(new Color(240,240,240));
+        
+        separator.setBackground(new Color(80,147,240));
+        jPanel2.setBackground(new Color(80,147,240));
+        jPanel1.setBackground(new Color(80,147,240));
+        separator2.setBackground(new Color(80,147,240));
+        
+        jLabel5.setForeground(new Color(120, 120, 120));
+        
+        jLabel6.setForeground(Color.black);
+        jLabel1.setForeground(Color.black);
+        textArea2.setForeground(Color.black);
+        textArea2.setForeground(Color.black);
+        textArea1.setForeground(Color.black);
+        jLabel2.setForeground(Color.black);
+        jLabel4.setForeground(Color.black);
+        jLabel7.setForeground(Color.black);
+    }//GEN-LAST:event_themeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -646,7 +680,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel915;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -655,5 +688,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel separator2;
     private javax.swing.JTextArea textArea1;
     private javax.swing.JTextArea textArea2;
+    private javax.swing.JLabel theme;
     // End of variables declaration//GEN-END:variables
 }
