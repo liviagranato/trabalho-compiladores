@@ -1,29 +1,15 @@
-<FUNCTION> vasculhaVetor(vetor)
-    par(0)	
-    impar(0)
-    i(0)
-    <ENQ> [i < 10]
-        <SE> [ vetor[i] % 2 = 0 ]
-            par++
-        </SE>
-        <SENAO>
-            impar++
-        </SENAO>
-        i++
-    </ENQ>	
-
-    <SE> [par > impar]
-        RETORNA "O seu vetor tem mais numeros pares"
-    </SE>
-    <ESE> [par = impar]
-        RETORNA "O seu vetor tem a mesma quantidade de numeros pares e impares"
-    </ESE>
-    <SENAO>
-        RETORNA "O seu vetor tem mais numeros impares"
-    </SENAO>
+<FUNCTION> fatorial(n)
+    fat = 1
+    i = 2
+    <ENQ> [i <= n]
+        fat = fat*i
+        i = i + 1
+    </ENQ>
+    
+    RETORNA fat	
 </FUNCTION>
 
 <MAIN>
-    vetor (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    << vasculhaVetor(vetor)  ##printa o retorno
+    >> n("Digite o valor de n: ")
+    << fatorial(n)
 </MAIN>

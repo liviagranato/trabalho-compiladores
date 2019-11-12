@@ -244,9 +244,9 @@ public class Interface extends javax.swing.JFrame {
         Parser s = new Parser(new analisador.Yylex(new StringReader(ST)));
         
         try {
-            s.parse();
+            s.parse();            
             textArea2.setText("Análise realizada corretamente!");
-            tradutor.Traduzir(textArea1.getText());
+            tradutor.getTokens(textArea1.getText());
         } catch (Exception ex) {
             Symbol sym = s.getS();
             textArea2.setText("Erro de Sintaxe: \nLinha: " + (sym.right) + " - Texto: " + sym.value);

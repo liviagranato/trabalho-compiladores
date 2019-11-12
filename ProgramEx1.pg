@@ -1,29 +1,25 @@
-<FUNCTION> vasculhaVector(vetor)
-    par(0)
-    impar(0)
-    <RT> [i(0); i < 10; i++]
-        <SE> [ vetor[i] % 2 = 0]
-            par++
-        </SE>
-        <SENAO>
-            impar++
-        </SENAO>
-    </RT>
-
-    <SE> [par > impar]
-        RETORNA "O seu vetor tem mais numeros pares"
-    </SE>
+<FUNCTION> testaPrimo(n)
+    i = 1
+    numDivisores = 0
     
-    <ESE> [par = impar]
-        RETORNA "O seu vetor tem a mesma quantidade de numeros pares e impares"
-    </ESE>
+    <ENQ> [i <= n]
+        <SE> [n % i = 0]
+            numDivisores = numDivisores + 1
+        </SE>        
+        i = i + 1
+    </ENQ>
 
+    <SE> [numDivisores = 2]
+        RETORNA "Seu número é primo"
+    </SE>
     <SENAO>
-        RETORNA "O seu vetor tem mais numeros impares"
+        RETORNA "Seu número não é primo"
     </SENAO>
+    
+    RETORNA fat	
 </FUNCTION>
 
 <MAIN>
-    vetor(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    << vasculhaVetor(vetor)
+    >> n("Digite o valor de n: ")
+    << testaPrimo(n)
 </MAIN>

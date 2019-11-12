@@ -29,11 +29,11 @@ parser code
 terminal OP_SOMA, OP_SUBTRACAO, OP_MULTIPLICACAO, OP_DIVISAO, OP_EXPONENCIACAO, OP_MOD, OP_LOGICO, OP_NEGACAO, OP_RELACIONAL, OP_IGUAL, OP_DIFERENTE, OP_BOOLEANO, ABRE_PARENTESES, FECHA_PARENTESES, ABRE_COLCHETES, FECHA_COLCHETES, PONTO_VIRGULA, VIRGULA, COMENTARIO, PRINCIPAL, FIM, FUNCAO, FUNCAO_FIM, SE, SE_FIM, ESE, ESE_FIM, SENAO, SENAO_FIM, REPETICAO, REPETICAO_FIM, ENQUANTO, ENQUANTO_FIM, ESCREVA, LEIA, RETORNA, IDENTIFICADOR, STRING, INTEIRO, REAL;
 
 
-non terminal programa, funcoes, operacoes, comandos, condicional, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos, comandos_relacionais, expressao, expressao_result, incremento, decremento, retorno, numeros, vetor, vetor_inteiro, vetor_real, vetor_string, vetor_pos, parametro, loop, loop_repeticao, loop_enquanto, iterador, iterador_digito, iterador_variavel;
+non terminal programa, funcoes, operacoes, comandos, condicional, condicional_composta, condicao, imprime, escaneia, chamada, atribuicao, comandos_logicos, comandos_relacionais, expressao, incremento, decremento, retorno, numeros, vetor, vetor_inteiro, vetor_real, vetor_string, vetor_pos, parametro, loop, loop_repeticao, loop_enquanto, iterador, iterador_digito, iterador_variavel;
 
 precedence left OP_SOMA, OP_SUBTRACAO;
-precedence left OP_MULTIPLICACAO, OP_DIVISAO;
-precedence left OP_EXPONENCIACAO, OP_MOD;
+precedence left OP_MULTIPLICACAO, OP_DIVISAO, OP_MOD;
+precedence left OP_EXPONENCIACAO;
 
 start with programa;
 
@@ -42,26 +42,23 @@ programa ::= PRINCIPAL operacoes FIM
         |  funcoes PRINCIPAL operacoes FIM
         ;	
 
-funcoes ::= FUNCAO chamada operacoes FUNCAO_FIM funcoes 
-       | FUNCAO chamada operacoes FUNCAO_FIM
+funcoes ::= FUNCAO operacoes FUNCAO_FIM funcoes 
+       | FUNCAO operacoes FUNCAO_FIM
        ;
 
 operacoes ::= comandos 
          | operacoes comandos 
-         | condicional
-         | operacoes condicional
-         | loop 
-         | operacoes loop
-         | expressao
          ;
 
 comandos ::= imprime 
         | escaneia 
-        | atribuicao 
-        | chamada
+        | atribuicao
+        | expressao
         | retorno
         | incremento
         | decremento
+        | condicional
+        | loop 
         | COMENTARIO
         ;
 
@@ -75,28 +72,35 @@ condicional_composta ::= ESE ABRE_COLCHETES condicao FECHA_COLCHETES operacoes E
                     | SENAO operacoes SENAO_FIM
                     ;
 
-condicao ::= comandos_relacionais 
-        | comandos_logicos
+condicao ::= comandos_relacionais
+        | comandos_logicos 
         ;
 
 
 //Comandos executaveis
 imprime ::= ESCREVA expressao
-       | ESCREVA chamada
        ;
 
-escaneia ::= LEIA IDENTIFICADOR
+escaneia ::= LEIA IDENTIFICADOR ABRE_PARENTESES STRING FECHA_PARENTESES
         ;
 
 chamada ::= IDENTIFICADOR ABRE_PARENTESES parametro FECHA_PARENTESES 
        | IDENTIFICADOR ABRE_PARENTESES FECHA_PARENTESES
        ;
 
-atribuicao ::= IDENTIFICADOR ABRE_PARENTESES numeros FECHA_PARENTESES 
-          | IDENTIFICADOR ABRE_PARENTESES OP_BOOLEANO FECHA_PARENTESES 
-          | IDENTIFICADOR ABRE_PARENTESES STRING FECHA_PARENTESES 
-          | IDENTIFICADOR ABRE_PARENTESES vetor FECHA_PARENTESES
+atribuicao ::= IDENTIFICADOR OP_IGUAL OP_BOOLEANO  
+          | IDENTIFICADOR OP_IGUAL ABRE_COLCHETES vetor FECHA_COLCHETES
+          | IDENTIFICADOR OP_IGUAL expressao
           ;
+
+comandos_relacionais ::= expressao OP_RELACIONAL IDENTIFICADOR
+                    | expressao OP_RELACIONAL numeros
+                    | expressao OP_DIFERENTE IDENTIFICADOR
+                    | expressao OP_DIFERENTE numeros
+                    | expressao OP_IGUAL OP_BOOLEANO
+                    | expressao OP_DIFERENTE STRING
+                    | expressao OP_IGUAL expressao
+                    ; 
 
 comandos_logicos ::= comandos_relacionais OP_LOGICO comandos_relacionais 
                 | comandos_relacionais OP_NEGACAO OP_LOGICO comandos_relacionais 
@@ -104,19 +108,6 @@ comandos_logicos ::= comandos_relacionais OP_LOGICO comandos_relacionais
                 | comandos_relacionais OP_LOGICO comandos_relacionais OP_LOGICO condicao
                 ;
 
-comandos_relacionais ::=  expressao_result 
-                    ;
-
-expressao_result ::= expressao OP_IGUAL IDENTIFICADOR
-                | expressao OP_IGUAL numeros
-                | expressao OP_RELACIONAL IDENTIFICADOR
-                | expressao OP_RELACIONAL numeros
-                | expressao OP_DIFERENTE IDENTIFICADOR
-                | expressao OP_DIFERENTE numeros
-                | expressao OP_IGUAL OP_BOOLEANO
-                | expressao OP_IGUAL STRING
-                | expressao OP_DIFERENTE STRING
-                ; 
 
 expressao ::= expressao OP_SOMA expressao
         | expressao OP_SUBTRACAO expressao
